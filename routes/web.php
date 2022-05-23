@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get ('/signup',[\App\Http\Controllers\mainController::class, 'signupAction']);
+Route::get ('/signup',[\App\Http\Controllers\mainController::class, 'signupAction']);
 
 Route::get('/', function () {
     return view('welcome');
