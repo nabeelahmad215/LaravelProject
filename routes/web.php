@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get ('/signup',[\App\Http\Controllers\mainController::class, 'signupAction']);
+Route::post('/dbAction',[\App\Http\Controllers\mainController::class, 'dbAction']);
 
 Route::get('/', function () {
     return view('welcome');
