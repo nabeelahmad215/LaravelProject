@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get ('/signup',[\App\Http\Controllers\mainController::class, 'signupAction']);
 Route::post('/dbAction',[\App\Http\Controllers\mainController::class, 'dbAction']);
+Route::get('/login',[\App\Http\Controllers\mainController::class, 'loginAction']);
+Route::post('/templogin',[\App\Http\Controllers\mainController::class, 'loginProcess']);
+Route::get('/dashboard',[\App\Http\Controllers\mainController::class, 'dashboard']);
+
 
 Route::get('/', function () {
     return view('welcome');
