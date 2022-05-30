@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - navbar with dropdown </title>
+  <title>HRMS - Dashboard</title>
   <style>
     /* Google Fonts Import Link */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -101,7 +101,7 @@
       min-width: 78px;
       text-align: center;
       line-height: 50px;
-      color: rgb(253, 4, 4);
+      color: #ffffff;
       font-size: 20px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -149,12 +149,11 @@
       font-size: 15px;
       padding: 5px 0;
       white-space: nowrap;
-      opacity: 0.6;
       transition: all 0.3s ease;
     }
 
     .sidebar .nav-links li .sub-menu a:hover {
-      opacity: 1;
+      color: #037971;
     }
 
     .sidebar.close .nav-links li .sub-menu {
@@ -207,7 +206,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #000000;
+      background: #036D66;
       padding: 12px 0;
       transition: all 0.5s ease;
     }
@@ -327,7 +326,7 @@
         left: 0;
         height: 100%;
         width: 260px;
-        background: #000000;
+        background: #036D66;
         z-index: 100;
         transition: all 0.5s ease;
       }
@@ -387,7 +386,7 @@
       }
 
       .sidebar .nav-links li:hover {
-        background: #030303;
+        background: #28BC89;
         color: rgb(255, 255, 255);
       }
 
@@ -406,7 +405,7 @@
         min-width: 78px;
         text-align: center;
         line-height: 50px;
-        color: rgb(253, 4, 4);
+        color: #ffffff;
         font-size: 20px;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -429,7 +428,7 @@
       .sidebar .nav-links li a .link_name {
         font-size: 18px;
         font-weight: 400;
-        color: rgb(182, 182, 182);
+        color: #ffffff;
         transition: all 0.4s ease;
       }
 
@@ -441,7 +440,7 @@
       .sidebar .nav-links li .sub-menu {
         padding: 6px 6px 14px 80px;
         margin-top: -10px;
-        background: #000000;
+        background: #28BC89;
         display: none;
       }
 
@@ -450,16 +449,15 @@
       }
 
       .sidebar .nav-links li .sub-menu a {
-        color: #fff;
+        color: white;
         font-size: 15px;
         padding: 5px 0;
         white-space: nowrap;
-        opacity: 0.6;
         transition: all 0.3s ease;
       }
 
       .sidebar .nav-links li .sub-menu a:hover {
-        opacity: 1;
+        color: #037971;
       }
 
       .sidebar.close .nav-links li .sub-menu {
@@ -512,7 +510,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #000000;
+        background: #036D66;
         padding: 12px 0;
         transition: all 0.5s ease;
       }
@@ -623,103 +621,86 @@
             <span class="link_name">Dashboard</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Category</a></li>
+            <li><a class="link_name" href="#">Dashboard</a></li>
           </ul>
         </li>
         <li>
           <div class="iocn-link">
             <a href="#">
-              <i class='bx bx-collection'></i>
-              <span class="link_name">Category</span>
+              <i class='bx bx-user-pin me-icon'></i>
+              <span class="link_name">Recruitment</span>
             </a>
             <i class='bx bxs-chevron-down arrow'></i>
           </div>
           <ul class="sub-menu">
-            <li><a class="link_name" href="#">Category</a></li>
-            <li><a href="#">HTML & CSS</a></li>
-            <li><a href="#">JavaScript</a></li>
-            <li><a href="#">PHP & MySQL</a></li>
+            <li><a class="link_name" href="#">Recruitment</a></li>
+            <li><a href="#">Job Request</a></li>
+            <li><a href="#">Candidates</a></li>
+            <li><a href="#">Job Interview</a></li>
+            <li><a href="#">Interview Feedback</a></li>
           </ul>
         </li>
         <li>
           <div class="iocn-link">
             <a href="#">
-              <i class='bx bx-book-alt'></i>
-              <span class="link_name">Posts</span>
+              <i class='bx bx-user me-icon'></i>
+              <span class="link_name">Employee</span>
             </a>
             <i class='bx bxs-chevron-down arrow'></i>
           </div>
           <ul class="sub-menu">
-            <li><a class="link_name" href="#">Posts</a></li>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">CSS Form</a></li>
-            <li><a href="#">Card Design</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-pie-chart-alt-2'></i>
-            <span class="link_name">Analytics</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Analytics</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-line-chart'></i>
-            <span class="link_name">Chart</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Chart</a></li>
+            <li><a class="link_name" href="#">Employee</a></li>
+            <li><a href="#">Employee Information</a></li>
+            <li><a href="#">Complaint</a></li>
+            <li><a href="#">Promotion</a></li>
+            <li><a href="#">Warning</a></li>
+            <li><a href="#">Resignation</a></li>
           </ul>
         </li>
         <li>
           <div class="iocn-link">
             <a href="#">
-              <i class='bx bx-plug'></i>
-              <span class="link_name">Plugins</span>
+              <i class='bx bx-calendar-alt me-icon'></i>
+              <span class="link_name">Leaves</span>
             </a>
             <i class='bx bxs-chevron-down arrow'></i>
           </div>
           <ul class="sub-menu">
-            <li><a class="link_name" href="#">Plugins</a></li>
-            <li><a href="#">UI Face</a></li>
-            <li><a href="#">Pigments</a></li>
-            <li><a href="#">Box Icons</a></li>
+            <li><a class="link_name" href="#">Leaves</a></li>
+            <li><a href="#">Request</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="#">Type</a></li>
+            <li><a href="#">Adjustment</a></li>
+          </ul>
+        </li>
+                <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class='bx bx-wallet-alt me-icon'></i>
+              <span class="link_name">Payroll</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+          </div>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Payroll</a></li>
+            <li><a href="#">Salary Sheet</a></li>
+            <li><a href="#">Payslip</a></li>
+            <li><a href="#">Reimbursement</a></li>
           </ul>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-compass'></i>
-            <span class="link_name">Explore</span>
+            <i class='bx bx-cog me-icon'></i>
+            <span class="link_name">Admin Panel</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Explore</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-history'></i>
-            <span class="link_name">History</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">History</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-cog'></i>
-            <span class="link_name">Setting</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Setting</a></li>
+            <li><a class="link_name" href="#">Admin Panel</a></li>
           </ul>
         </li>
         <li>
           <div class="profile-details">
             <div class="profile-content">
-              <img src="profile.jpg" alt="profileImg">
+              <img src="profile.jpg" alt="IMG">
             </div>
             <div class="name-job">
               <div class="profile_name">Username</div>
@@ -733,7 +714,7 @@
     <section class="home-section">
       <div class="home-content">
         <i class='bx bx-menu'></i>
-        <span class="text">WELCOME | @php  $postedData['full_name'] ?? '';  @endphp</span>
+        <span class="text">WELCOME | {{ $postedData['full_name'] }}</span>
       </div>
     </section>
     <!--script starts here-->
@@ -755,6 +736,7 @@
     sidebarBtn.addEventListener("click", () => {
       sidebar.classList.toggle("close");
     });
+
   </script>
 
 </body>
