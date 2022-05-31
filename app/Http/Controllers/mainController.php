@@ -40,7 +40,7 @@ class mainController extends Controller
         // }
         $oUser = new \App\Models\signup_model; //\App\Models\class_name
         $response = $oUser->store($request);
-        return redirect('/');
+        return redirect('/login');
     }
     public function loginAction()
     {
