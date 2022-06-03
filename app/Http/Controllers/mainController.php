@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class mainController extends Controller
 {
+    public function back()
+    {
+        session()->forget('login');
+        return redirect ('/login');
+    }
 
     public function signupAction()
     {
@@ -57,14 +62,23 @@ class mainController extends Controller
     //    dd($data);
         if(!empty($data)){
             $request->session()->put('login', $data);
+
             return redirect('/dashboard')->with(['postedData'=>$data]);
         }
     }
     
     public function dashboard()
     {
-        $data['postedData'] = session()->get('postedData');
+        // dd(session()->all());
+        if(session()->has('login')){
+            $data['postedData'] = session()->get('login');
+            return view('dashboard', $data);
+        }
+        else
+        {
+            return redirect('/login');
+        }
         // dd($data);
-        return view('dashboard', $data);
+        
     }
 }

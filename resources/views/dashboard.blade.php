@@ -410,6 +410,7 @@
         <div class="home-content">
             <i class='bx bx-menu'></i>
             <span class="text">WELCOME | {{ $postedData['full_name'] ?? ''}}</span>
+            <a href="/abc">Logout</a>
         </div>
     </section>
     <!--script starts here-->
