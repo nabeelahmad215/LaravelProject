@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\reactSignupModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class mainController extends Controller
 {
@@ -80,5 +81,20 @@ class mainController extends Controller
         }
         // dd($data);
         
+    }
+
+    public function reactRegister(Request $request){
+        $userDM = new reactSignupModel; //new mode
+        $userDM->company = $request->input('name');
+        $userDM->mobile = $request->input('mobile');
+        $userDM->cnic = $request->input('cnic');
+        $userDM->email = $request->input('email');
+        $userDM->password = $request->input('password');
+        $userDM->save();
+        return $userDM;
+    }
+
+    public function reactLogin(){
+        echo 'hello';
     }
 }
