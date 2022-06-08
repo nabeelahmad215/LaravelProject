@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\reactSignupModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
-use App\Models\User;
 
 class mainController extends Controller
 {
@@ -94,7 +93,13 @@ class mainController extends Controller
         return $userDM;
     }
 
-    public function reactLogin(){
-        echo 'hello';
+    public function reactLogin(Request $request){
+        $user = reactSignupModel::where('email', $request->email)->where('password', $request->password)->first();
+
+    return $user;
+}
+        
+
+
     }
 }
