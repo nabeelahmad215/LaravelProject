@@ -96,10 +96,6 @@ class mainController extends Controller
     public function reactLogin(Request $request){
         $user = reactSignupModel::where('email', $request->email)->where('password', $request->password)->first();
 
-    return $user;
-}
-        
-
-
+        return $user;
     }
 }
