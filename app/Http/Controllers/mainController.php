@@ -8,6 +8,7 @@ use App\Models\userModel;
 
 class mainController extends Controller
 {
+
     public function back()
     {
         session()->forget('login');
@@ -97,5 +98,13 @@ class mainController extends Controller
         $user = reactSignupModel::where('email', $request->email)->where('password', $request->password)->first();
 
         return $user;
+    }
+
+
+    public function index()
+    {
+        $data= reactSignupModel::get()->all();
+        return $data;
+        // dd($users);
     }
 }
