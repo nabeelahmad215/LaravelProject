@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\reactEmpInfoModel;
 use App\Models\reactSignupModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
@@ -85,7 +86,7 @@ class mainController extends Controller
 
     public function reactRegister(Request $request){
         $userDM = new reactSignupModel; //new mode
-        $userDM->company = $request->input('name');
+        $userDM->company = $request->input('company');
         $userDM->mobile = $request->input('mobile');
         $userDM->cnic = $request->input('cnic');
         $userDM->email = $request->input('email');
@@ -106,5 +107,15 @@ class mainController extends Controller
         $data= reactSignupModel::get()->all();
         return $data;
         // dd($users);
+    }
+
+    public function reactEmpInfo(Request $request){
+        $userDM = new reactEmpInfoModel; //new mode
+        $userDM->emp_code = $request->input('emp_code');
+        $userDM->name = $request->input('name');
+        $userDM->fname = $request->input('fname');
+        $userDM->gender = $request->input('gender');
+        $userDM->save();
+        return $userDM;
     }
 }

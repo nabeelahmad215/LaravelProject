@@ -21,6 +21,7 @@ Route::get('user', [App\Http\Controllers\testcontroller::class, 'dbAction']);
 Route::post('register', [App\Http\Controllers\mainController::class, 'reactRegister']);
 Route::post('reactlogin', [App\Http\Controllers\mainController::class, 'reactLogin']);
 Route::get('dropdown', [App\Http\Controllers\mainController::class, 'index']);
+Route::post('emp-info', [App\Http\Controllers\mainController::class, 'reactEmpInfo']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
