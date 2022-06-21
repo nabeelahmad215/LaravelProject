@@ -115,7 +115,32 @@ class mainController extends Controller
         $userDM->name = $request->input('name');
         $userDM->fname = $request->input('fname');
         $userDM->gender = $request->input('gender');
+        $userDM->dob = $request->input('dob');
+        $userDM->religion = $request->input('religion');
+        $userDM->marital = $request->input('marital');
+        $userDM->cnic = $request->input('cnic');
+        $userDM->contact = $request->input('contact');
+        $userDM->address = $request->input('address');
+        $userDM->qualification = $request->input('qualification');
+        $userDM->degree = $request->input('degree');
+        $userDM->institute = $request->input('institute');
+        $userDM->completedate = $request->input('completedate');
+        $userDM->basicsalary = $request->input('basicsalary');
+        $userDM->salarytax = $request->input('salarytax');
+        $userDM->grosssalary = $request->input('grosssalary');
+        $userDM->joindate = $request->input('joindate');
+        $userDM->emptype = $request->input('emptype');
+        $userDM->designation = $request->input('designation');
+        $userDM->department = $request->input('department');
+        $userDM->status = $request->input('status');
         $userDM->save();
         return $userDM;
+    }
+
+    public function reactEmpInfoHistory()
+    {
+        $data= reactEmpInfoModel::get()->all();
+        return $data;
+        // dd($users);
     }
 }
