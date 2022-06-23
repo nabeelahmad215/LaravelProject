@@ -143,4 +143,10 @@ class mainController extends Controller
         return $data;
         // dd($users);
     }
+
+    public function reactEmpDeleteAction($id){
+        $data = reactEmpInfoModel::find($id);
+        $data->delete();
+        return $data;
+    }
 }

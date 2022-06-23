@@ -23,6 +23,9 @@ Route::post('reactlogin', [App\Http\Controllers\mainController::class, 'reactLog
 Route::get('dropdown', [App\Http\Controllers\mainController::class, 'index']);
 Route::post('emp-info', [App\Http\Controllers\mainController::class, 'reactEmpInfo']);
 Route::get('empinfohistory', [App\Http\Controllers\mainController::class, 'reactEmpInfoHistory']);
+Route::get('/empinfodelete/{id}', [App\Http\Controllers\mainController::class, 'reactEmpDeleteAction']);
+
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
