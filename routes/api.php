@@ -24,6 +24,7 @@ Route::get('dropdown', [App\Http\Controllers\mainController::class, 'index']);
 Route::post('emp-info', [App\Http\Controllers\mainController::class, 'reactEmpInfo']);
 Route::get('empinfohistory', [App\Http\Controllers\mainController::class, 'reactEmpInfoHistory']);
 Route::get('/empinfodelete/{id}', [App\Http\Controllers\mainController::class, 'reactEmpDeleteAction']);
+Route::get('/empinfoupdate/{id}', [App\Http\Controllers\mainController::class, 'reactEmpUpdateAction']);
 
 
 

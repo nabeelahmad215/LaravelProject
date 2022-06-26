@@ -7,7 +7,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class reactEmpInfoModel extends Model {
+class reactEmpInfoModel extends Model
+{
 
     protected $table = 'employee_info';
     protected $primaryKey = 'id';

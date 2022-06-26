@@ -13,7 +13,7 @@ class mainController extends Controller
     public function back()
     {
         session()->forget('login');
-        return redirect ('/login');
+        return redirect('/login');
     }
 
     public function signupAction()
@@ -61,30 +61,29 @@ class mainController extends Controller
     public function loginProcess(Request $request)
     {
         $data = userModel::where('email', $request->email)->where('password', $request->password)->first();
-    //    dd($data);
-        if(!empty($data)){
+        //    dd($data);
+        if (!empty($data)) {
             $request->session()->put('login', $data);
 
-            return redirect('/dashboard')->with(['postedData'=>$data]);
+            return redirect('/dashboard')->with(['postedData' => $data]);
         }
     }
-    
+
     public function dashboard()
     {
         // dd(session()->all());
-        if(session()->has('login')){
+        if (session()->has('login')) {
             $data['postedData'] = session()->get('login');
             return view('dashboard', $data);
-        }
-        else
-        {
+        } else {
             return redirect('/login');
         }
         // dd($data);
-        
+
     }
 
-    public function reactRegister(Request $request){
+    public function reactRegister(Request $request)
+    {
         $userDM = new reactSignupModel; //new mode
         $userDM->company = $request->input('company');
         $userDM->mobile = $request->input('mobile');
@@ -95,7 +94,8 @@ class mainController extends Controller
         return $userDM;
     }
 
-    public function reactLogin(Request $request){
+    public function reactLogin(Request $request)
+    {
         $user = reactSignupModel::where('email', $request->email)->where('password', $request->password)->first();
 
         return $user;
@@ -104,12 +104,13 @@ class mainController extends Controller
 
     public function index()
     {
-        $data= reactSignupModel::get()->all();
+        $data = reactSignupModel::get()->all();
         return $data;
         // dd($users);
     }
 
-    public function reactEmpInfo(Request $request){
+    public function reactEmpInfo(Request $request)
+    {
         $userDM = new reactEmpInfoModel; //new mode
         $userDM->emp_code = $request->input('emp_code');
         $userDM->name = $request->input('name');
@@ -139,14 +140,24 @@ class mainController extends Controller
 
     public function reactEmpInfoHistory()
     {
-        $data= reactEmpInfoModel::get()->all();
+        $data = reactEmpInfoModel::get()->all();
         return $data;
         // dd($users);
     }
 
-    public function reactEmpDeleteAction($id){
+    public function reactEmpDeleteAction($id)
+    {
         $data = reactEmpInfoModel::find($id);
         $data->delete();
         return $data;
+    }
+
+    public function reactEmpUpdateAction($id)
+    {
+        $rs = reactEmpInfoModel::find($id);
+        $data['postedData']['name'] = $rs->name;
+        $data['id'] = $id;
+        // $data= $rs;
+        return $rs;
     }
 }
