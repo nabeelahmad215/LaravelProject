@@ -152,12 +152,28 @@ class mainController extends Controller
         return $data;
     }
 
-    public function reactEmpUpdateAction($id)
+    public function reactEmpEditAction($id)
     {
         $rs = reactEmpInfoModel::find($id);
-        $data['postedData']['name'] = $rs->name;
-        $data['id'] = $id;
+        // $data['postedData']['name'] = $rs->name;
+        // $data['id'] = $id;
         // $data= $rs;
         return $rs;
+    }
+
+    public function reactEmpUpdateAction(Request $req, $id)
+    {
+        $rs = reactEmpInfoModel::find($id);
+        $rs->emp_code = $req->input('emp_code');
+        $rs->name = $req->input('name');
+        $rs->save();
+        return response()->json($rs);
+        // $data = json_decode(file_get_contents('php://input'), true);
+        // // $userDM = reactEmpInfoModel::find($request->id);
+        // // $rs = reactEmpInfoModel::find($id);
+        // $username = $data['name'];
+        // $dataupdate = array('name'=>$username);
+        // $update = reactEmpInfoModel::where($id, $dataupdate);
+
     }
 }

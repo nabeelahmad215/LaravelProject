@@ -24,8 +24,8 @@ Route::get('dropdown', [App\Http\Controllers\mainController::class, 'index']);
 Route::post('emp-info', [App\Http\Controllers\mainController::class, 'reactEmpInfo']);
 Route::get('empinfohistory', [App\Http\Controllers\mainController::class, 'reactEmpInfoHistory']);
 Route::get('/empinfodelete/{id}', [App\Http\Controllers\mainController::class, 'reactEmpDeleteAction']);
-Route::get('/empinfoupdate/{id}', [App\Http\Controllers\mainController::class, 'reactEmpUpdateAction']);
-
+Route::get('/empinfoedit/{id}', [App\Http\Controllers\mainController::class, 'reactEmpEditAction']);
+Route::post('/empinfoupdate/{id}', [App\Http\Controllers\mainController::class, 'reactEmpUpdateAction']);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
