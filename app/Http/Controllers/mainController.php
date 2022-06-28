@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\reactEmpInfoModel;
 use App\Models\reactSignupModel;
+use App\Models\reactResignationModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
 
@@ -106,7 +107,14 @@ class mainController extends Controller
     {
         $data = reactSignupModel::get()->all();
         return $data;
-        // dd($users);
+        // dd($data);
+    }
+
+    public function emp_dropdown()
+    {
+        $data = reactEmpInfoModel::get()->all();
+        return $data;
+        // dd($data);
     }
 
     public function reactEmpInfo(Request $request)
@@ -155,9 +163,6 @@ class mainController extends Controller
     public function reactEmpEditAction($id)
     {
         $rs = reactEmpInfoModel::find($id);
-        // $data['postedData']['name'] = $rs->name;
-        // $data['id'] = $id;
-        // $data= $rs;
         return $rs;
     }
 
@@ -187,13 +192,59 @@ class mainController extends Controller
         $userDM->department = $request->input('department');
         $userDM->status = $request->input('status');
         $userDM->save();
-        return response()->json($rs);
-        // $data = json_decode(file_get_contents('php://input'), true);
-        // // $userDM = reactEmpInfoModel::find($request->id);
-        // // $rs = reactEmpInfoModel::find($id);
-        // $username = $data['name'];
-        // $dataupdate = array('name'=>$username);
-        // $update = reactEmpInfoModel::where($id, $dataupdate);
+        return response()->json($userDM);
+    }
 
+    public function reactEmpResignation(Request $request)
+    {
+        $userDM = new reactResignationModel; //new mode
+        $userDM->doc_date = $request->input('doc_date');
+        $userDM->emp_code = $request->input('emp_code');
+        $userDM->resignation_date = $request->input('resignation_date');
+        $userDM->notice_date = $request->input('notice_date');
+        $userDM->detail = $request->input('detail');
+        $userDM->status = $request->input('status');
+        $userDM->save();
+        return $userDM;
+    }
+
+    public function reactResignationHistory()
+    {
+        $data = reactResignationModel::get()->all();
+        return $data;
+        // dd($users);
+    }
+    
+    public function reactResignDeleteAction($id)
+    {
+        $data = reactResignationModel::find($id);
+        $data->delete();
+        return $data;
+    }
+
+    public function reactResignEditAction($id)
+    {
+        $rs = reactResignationModel::find($id);
+        return $rs;
+    }
+
+    public function reactResignUpdateAction(Request $request, $id)
+    {
+        $userDM = reactResignationModel::find($id);
+        $userDM->doc_date = $request->input('doc_date');
+        $userDM->emp_code = $request->input('emp_code');
+        $userDM->resignation_date = $request->input('resignation_date');
+        $userDM->notice_date = $request->input('notice_date');
+        $userDM->detail = $request->input('detail');
+        $userDM->status = $request->input('status');
+        $userDM->save();
+        return response()->json($userDM);
+    }
+    public function reactStatusUpdateAction(Request $request, $id)
+    {
+        $userDM = reactResignationModel::find($id);
+        $userDM->status = $request->input('status');
+        $userDM->save();
+        return response()->json($userDM);
     }
 }
