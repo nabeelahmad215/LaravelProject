@@ -33,6 +33,8 @@ Route::get('/resignationdelete/{id}', [App\Http\Controllers\mainController::clas
 Route::get('/edit-resign/{id}', [App\Http\Controllers\mainController::class, 'reactResignEditAction']);
 Route::post('/resignupdate/{id}', [App\Http\Controllers\mainController::class, 'reactResignUpdateAction']);
 Route::post('/statusupdate/{id}', [App\Http\Controllers\mainController::class, 'reactStatusUpdateAction']);
+Route::get('empfetch/{id}', [App\Http\Controllers\mainController::class, 'reactEmpFetch']);
+Route::post('promotion', [App\Http\Controllers\mainController::class, 'reactEmpPromotion']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

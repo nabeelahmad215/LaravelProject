@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\reactEmpInfoModel;
 use App\Models\reactSignupModel;
 use App\Models\reactResignationModel;
+use App\Models\PromotionModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
 
@@ -246,5 +247,20 @@ class mainController extends Controller
         $userDM->status = $request->input('status');
         $userDM->save();
         return response()->json($userDM);
+    }
+
+    public function reactEmpFetch($id)
+    {
+        $data = reactEmpInfoModel::find($id);
+        return $data;
+        // dd($users);
+    }
+
+    public function reactEmpPromotion(Request $request)
+    {
+        $userDM = new PromotionModel; //new mode
+        $userDM->current_salary = $request->input('current_salary');
+        $userDM->save();
+        return $userDM;
     }
 }
