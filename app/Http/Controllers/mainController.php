@@ -7,6 +7,7 @@ use App\Models\reactSignupModel;
 use App\Models\reactResignationModel;
 use App\Models\PromotionModel;
 use App\Models\reactLeaveModel;
+use App\Models\reactReimburstment;
 use Illuminate\Http\Request;
 use App\Models\userModel;
 use Illuminate\Support\Facades\DB;
@@ -341,6 +342,50 @@ class mainController extends Controller
     {
         $userDM = reactLeaveModel::find($id);
         $userDM->status = $request->input('status');
+        $userDM->save();
+        return response()->json($userDM);
+    }
+
+    public function reactEmpReimburs(Request $request)
+    {
+        $userDM = new reactReimburstment; //new mode
+        $userDM->doc_date = $request->input('doc_date');
+        $userDM->emp_id = $request->input('emp_id');
+        $userDM->category = $request->input('category');
+        $userDM->amount = $request->input('amount');
+        $userDM->detail = $request->input('detail');
+        $userDM->status = $request->input('status');
+        $userDM->save();
+        DB::statement('UPDATE tblreimburstment INNER JOIN employee_info ON tblreimburstment.emp_id = employee_info.id SET tblreimburstment.name = employee_info.name, tblreimburstment.emp_code = employee_info.emp_code WHERE tblreimburstment.emp_id = employee_info.id');
+        return $userDM;
+    }
+
+    public function reactReimbursHistory()
+    {
+        $data = reactReimburstment::get()->all();
+        return $data;
+        // dd($users);
+    }
+
+    public function reactReimbursDelete($id)
+    {
+        $data = reactReimburstment::find($id);
+        $data->delete();
+        return $data;
+    }
+
+    public function reactReimbursEdit($id)
+    {
+        $rs = reactReimburstment::find($id);
+        return $rs;
+    }
+    public function reactReimbursUpdate(Request $request, $id)
+    {
+        $userDM = reactReimburstment::find($id);
+        $userDM->doc_date = $request->input('doc_date');
+        $userDM->category = $request->input('category');
+        $userDM->amount = $request->input('amount');
+        $userDM->detail = $request->input('detail');
         $userDM->save();
         return response()->json($userDM);
     }

@@ -43,7 +43,11 @@ Route::get('approved', [App\Http\Controllers\mainController::class, 'reactEmpLea
 Route::get('reject', [App\Http\Controllers\mainController::class, 'reactEmpLeaveReject']);
 Route::get('/leavedelete/{id}', [App\Http\Controllers\mainController::class, 'reactEmpLeaveDelete']);
 Route::post('/leave-status/{id}', [App\Http\Controllers\mainController::class, 'reactLeaveStatus']);
-
+Route::post('reimburstment', [App\Http\Controllers\mainController::class, 'reactEmpReimburs']);
+Route::get('reimburs-history', [App\Http\Controllers\mainController::class, 'reactReimbursHistory']);
+Route::get('/reimbursdelete/{id}', [App\Http\Controllers\mainController::class, 'reactReimbursDelete']);
+Route::get('/reimbursedit/{id}', [App\Http\Controllers\mainController::class, 'reactReimbursEdit']);
+Route::post('/reimbursupdate/{id}', [App\Http\Controllers\mainController::class, 'reactReimbursUpdate']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
