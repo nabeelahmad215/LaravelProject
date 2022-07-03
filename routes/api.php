@@ -35,6 +35,7 @@ Route::post('/resignupdate/{id}', [App\Http\Controllers\mainController::class, '
 Route::post('/statusupdate/{id}', [App\Http\Controllers\mainController::class, 'reactStatusUpdateAction']);
 Route::get('empfetch/{id}', [App\Http\Controllers\mainController::class, 'reactEmpFetch']);
 Route::post('promotion', [App\Http\Controllers\mainController::class, 'reactEmpPromotion']);
+Route::get('promotion-history', [App\Http\Controllers\mainController::class, 'reactPromotionHistory']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

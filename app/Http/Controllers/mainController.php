@@ -8,6 +8,7 @@ use App\Models\reactResignationModel;
 use App\Models\PromotionModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
+use Illuminate\Support\Facades\DB;
 
 class mainController extends Controller
 {
@@ -113,8 +114,11 @@ class mainController extends Controller
 
     public function emp_dropdown()
     {
-        $data = reactEmpInfoModel::get()->all();
+        // if((DB::statement("SELECT * FROM employee_info WHERE status = 'active'")) == true){
+        $data = reactEmpInfoModel::where('status', 'Active')->get();
         return $data;
+        // }
+
         // dd($data);
     }
 
@@ -200,7 +204,7 @@ class mainController extends Controller
     {
         $userDM = new reactResignationModel; //new mode
         $userDM->doc_date = $request->input('doc_date');
-        $userDM->emp_code = $request->input('emp_code');
+        $userDM->emp_id = $request->input('emp_id');
         $userDM->resignation_date = $request->input('resignation_date');
         $userDM->notice_date = $request->input('notice_date');
         $userDM->detail = $request->input('detail');
@@ -215,7 +219,7 @@ class mainController extends Controller
         return $data;
         // dd($users);
     }
-    
+
     public function reactResignDeleteAction($id)
     {
         $data = reactResignationModel::find($id);
@@ -233,7 +237,7 @@ class mainController extends Controller
     {
         $userDM = reactResignationModel::find($id);
         $userDM->doc_date = $request->input('doc_date');
-        $userDM->emp_code = $request->input('emp_code');
+        $userDM->emp_id = $request->input('emp_id');
         $userDM->resignation_date = $request->input('resignation_date');
         $userDM->notice_date = $request->input('notice_date');
         $userDM->detail = $request->input('detail');
@@ -246,6 +250,7 @@ class mainController extends Controller
         $userDM = reactResignationModel::find($id);
         $userDM->status = $request->input('status');
         $userDM->save();
+        DB::statement('UPDATE employee_info INNER JOIN tblresignation ON employee_info.id = tblresignation.emp_id SET employee_info.status= tblresignation.status WHERE employee_info.id = tblresignation.emp_id');
         return response()->json($userDM);
     }
 
@@ -259,8 +264,26 @@ class mainController extends Controller
     public function reactEmpPromotion(Request $request)
     {
         $userDM = new PromotionModel; //new mode
-        $userDM->current_salary = $request->input('current_salary');
+        $userDM->emp_id = $request->input('emp_id');
+        $userDM->name = $request->input('name');
+        $userDM->promotion_date = $request->input('promotion_date');
+        $userDM->promoted_to = $request->input('promoted_to');
+        $userDM->promoted_salary = $request->input('promoted_salary');
+        $userDM->promoted_tax = $request->input('promoted_tax');
+        $userDM->promoted_gross = $request->input('promoted_gross');
+        $userDM->detail = $request->input('detail');
         $userDM->save();
+        // DB::statement('DELETE FROM tblpromotion WHERE emp_id=emp_id');
+        DB::statement('DELETE FROM tblpromotion WHERE ID NOT IN ( SELECT MAX(ID) FROM tblpromotion GROUP BY emp_id)');
+        DB::statement('UPDATE tblpromotion INNER JOIN employee_info ON tblpromotion.emp_id = employee_info.id SET tblpromotion.name = employee_info.name, tblpromotion.promoted_from = employee_info.designation, tblpromotion.current_salary= employee_info.basicsalary, tblpromotion.emp_code = employee_info.emp_code WHERE tblpromotion.emp_id = employee_info.id');
+        DB::statement('UPDATE employee_info INNER JOIN tblpromotion ON employee_info.id = tblpromotion.emp_id SET employee_info.designation = tblpromotion.promoted_to, employee_info.basicsalary = tblpromotion.promoted_salary, employee_info.salarytax = tblpromotion.promoted_tax, employee_info.grosssalary = tblpromotion.promoted_gross WHERE employee_info.id = tblpromotion.emp_id');
         return $userDM;
+    }
+
+    public function reactPromotionHistory()
+    {
+        $data = PromotionModel::get()->all();
+        return $data;
+        // dd($users);
     }
 }
