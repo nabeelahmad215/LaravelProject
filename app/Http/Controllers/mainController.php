@@ -6,6 +6,7 @@ use App\Models\reactEmpInfoModel;
 use App\Models\reactSignupModel;
 use App\Models\reactResignationModel;
 use App\Models\PromotionModel;
+use App\Models\reactLeaveModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
 use Illuminate\Support\Facades\DB;
@@ -114,11 +115,8 @@ class mainController extends Controller
 
     public function emp_dropdown()
     {
-        // if((DB::statement("SELECT * FROM employee_info WHERE status = 'active'")) == true){
         $data = reactEmpInfoModel::where('status', 'Active')->get();
         return $data;
-        // }
-
         // dd($data);
     }
 
@@ -216,6 +214,7 @@ class mainController extends Controller
     public function reactResignationHistory()
     {
         $data = reactResignationModel::get()->all();
+        DB::statement('UPDATE tblresignation INNER JOIN employee_info ON tblresignation.emp_id = employee_info.id SET tblresignation.emp_code =employee_info.emp_code WHERE tblresignation.emp_id = employee_info.id');
         return $data;
         // dd($users);
     }
@@ -245,6 +244,7 @@ class mainController extends Controller
         $userDM->save();
         return response()->json($userDM);
     }
+
     public function reactStatusUpdateAction(Request $request, $id)
     {
         $userDM = reactResignationModel::find($id);
@@ -273,7 +273,6 @@ class mainController extends Controller
         $userDM->promoted_gross = $request->input('promoted_gross');
         $userDM->detail = $request->input('detail');
         $userDM->save();
-        // DB::statement('DELETE FROM tblpromotion WHERE emp_id=emp_id');
         DB::statement('DELETE FROM tblpromotion WHERE ID NOT IN ( SELECT MAX(ID) FROM tblpromotion GROUP BY emp_id)');
         DB::statement('UPDATE tblpromotion INNER JOIN employee_info ON tblpromotion.emp_id = employee_info.id SET tblpromotion.name = employee_info.name, tblpromotion.promoted_from = employee_info.designation, tblpromotion.current_salary= employee_info.basicsalary, tblpromotion.emp_code = employee_info.emp_code WHERE tblpromotion.emp_id = employee_info.id');
         DB::statement('UPDATE employee_info INNER JOIN tblpromotion ON employee_info.id = tblpromotion.emp_id SET employee_info.designation = tblpromotion.promoted_to, employee_info.basicsalary = tblpromotion.promoted_salary, employee_info.salarytax = tblpromotion.promoted_tax, employee_info.grosssalary = tblpromotion.promoted_gross WHERE employee_info.id = tblpromotion.emp_id');
@@ -285,5 +284,64 @@ class mainController extends Controller
         $data = PromotionModel::get()->all();
         return $data;
         // dd($users);
+    }
+
+    public function reactEmpLeave(Request $request)
+    {
+        $userDM = new reactLeaveModel; //new mode
+        $userDM->emp_id = $request->input('emp_id');
+        $userDM->from_date = $request->input('from_date');
+        $userDM->to_date = $request->input('to_date');
+        $userDM->type = $request->input('type');
+        $userDM->reason = $request->input('reason');
+        $userDM->status = $request->input('status');
+        $userDM->save();
+        DB::statement('UPDATE tblleave INNER JOIN employee_info ON tblleave.emp_id = employee_info.id SET tblleave.name = employee_info.name, tblleave.emp_code = employee_info.emp_code WHERE tblleave.emp_id = employee_info.id');
+        return $userDM;
+    }
+
+    public function reactEmpLeaveAll()
+    {
+        $data = reactLeaveModel::get()->all();
+        return $data;
+    }
+
+    public function reactEmpLeavePending()
+    {
+        $url = DB::table('tblleave')->where('status', '=', 'Pending')->get();
+        // echo "<pre>";
+        // print_r($url);
+        return response()->json($url);
+    }
+
+    public function reactEmpLeaveApproved()
+    {
+        $url = DB::table('tblleave')->where('status', '=', 'Approved')->get();
+        // echo "<pre>";
+        // print_r($url);
+        return response()->json($url);
+    }
+
+    public function reactEmpLeaveReject()
+    {
+        $url = DB::table('tblleave')->where('status', '=', 'Reject')->get();
+        // echo "<pre>";
+        // print_r($url);
+        return response()->json($url);
+    }
+
+    public function reactEmpLeaveDelete($id)
+    {
+        $data = reactLeaveModel::find($id);
+        $data->delete();
+        return $data;
+    }
+
+    public function reactLeaveStatus(Request $request, $id)
+    {
+        $userDM = reactLeaveModel::find($id);
+        $userDM->status = $request->input('status');
+        $userDM->save();
+        return response()->json($userDM);
     }
 }

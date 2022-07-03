@@ -36,6 +36,14 @@ Route::post('/statusupdate/{id}', [App\Http\Controllers\mainController::class, '
 Route::get('empfetch/{id}', [App\Http\Controllers\mainController::class, 'reactEmpFetch']);
 Route::post('promotion', [App\Http\Controllers\mainController::class, 'reactEmpPromotion']);
 Route::get('promotion-history', [App\Http\Controllers\mainController::class, 'reactPromotionHistory']);
+Route::post('leave', [App\Http\Controllers\mainController::class, 'reactEmpLeave']);
+Route::get('all', [App\Http\Controllers\mainController::class, 'reactEmpLeaveAll']);
+Route::get('pending', [App\Http\Controllers\mainController::class, 'reactEmpLeavePending']);
+Route::get('approved', [App\Http\Controllers\mainController::class, 'reactEmpLeaveApproved']);
+Route::get('reject', [App\Http\Controllers\mainController::class, 'reactEmpLeaveReject']);
+Route::get('/leavedelete/{id}', [App\Http\Controllers\mainController::class, 'reactEmpLeaveDelete']);
+Route::post('/leave-status/{id}', [App\Http\Controllers\mainController::class, 'reactLeaveStatus']);
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
