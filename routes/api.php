@@ -48,6 +48,9 @@ Route::get('reimburs-history', [App\Http\Controllers\mainController::class, 'rea
 Route::get('/reimbursdelete/{id}', [App\Http\Controllers\mainController::class, 'reactReimbursDelete']);
 Route::get('/reimbursedit/{id}', [App\Http\Controllers\mainController::class, 'reactReimbursEdit']);
 Route::post('/reimbursupdate/{id}', [App\Http\Controllers\mainController::class, 'reactReimbursUpdate']);
+Route::get('empfetch/{id}', [App\Http\Controllers\mainController::class, 'reactEmpFetch']);
+Route::post('payroll', [App\Http\Controllers\mainController::class, 'reactEmpPayroll']);
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

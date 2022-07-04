@@ -8,6 +8,7 @@ use App\Models\reactResignationModel;
 use App\Models\PromotionModel;
 use App\Models\reactLeaveModel;
 use App\Models\reactReimburstment;
+use App\Models\reactPayrollModel;
 use Illuminate\Http\Request;
 use App\Models\userModel;
 use Illuminate\Support\Facades\DB;
@@ -379,6 +380,7 @@ class mainController extends Controller
         $rs = reactReimburstment::find($id);
         return $rs;
     }
+
     public function reactReimbursUpdate(Request $request, $id)
     {
         $userDM = reactReimburstment::find($id);
@@ -389,4 +391,21 @@ class mainController extends Controller
         $userDM->save();
         return response()->json($userDM);
     }
+
+    public function reactEmpPayroll(Request $request)
+    {
+        $userDM = new reactPayrollModel; //new mode
+        $userDM->salary_month = $request->input('salary_month');
+        $userDM->emp_id = $request->input('emp_id');
+        $userDM->gross_salary = $request->input('gross_salary');
+        $userDM->allownce = $request->input('allownce');
+        $userDM->deduction = $request->input('deduction');
+        $userDM->reimburstment = $request->input('reimburstment');
+        $userDM->net_total = $request->input('net_total');
+        $userDM->detail = $request->input('detail');
+        $userDM->save();
+        DB::statement('UPDATE tblpayroll INNER JOIN employee_info ON tblpayroll.emp_id = employee_info.id SET tblpayroll.name = employee_info.name, tblpayroll.emp_code = employee_info.emp_code, tblpayroll.gross_salary=employee_info.grosssalary WHERE tblpayroll.emp_id = employee_info.id');
+        return $userDM;
+    }
+
 }
